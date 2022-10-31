@@ -55,7 +55,7 @@ This section considers how to push new messages sent by one user to others
 Option1: Using websocket
 A websocket is established between the client and server.
 
-- A user send a message to Chat backend
+- A user sends a message to Chat backend
 - Chat backend(s) stores the message successfully
 - Chat backend(s) sends websocket event(s) containing the new message to other online users
 
