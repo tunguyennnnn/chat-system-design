@@ -30,10 +30,11 @@ requirements that the product team is asking for:
 * typing indicators
 
 ### Non Functional requirements:
+* The system should be planned to be able to migrated to high load traffic. 
 
 ### Authentication:
 
-JWT -
+It's prefered to use JWT compared to user session so the web server can be stateless to be scaled in the future.
 
 ### CHAT APIs
 
@@ -199,4 +200,13 @@ Cons:
  * Slowly to deliver messages to other users compared to option 1 - this is not really a con because in high load, async flow could be faster than a synchonous flow. 
  
  
- ## Database 
+ ## Databases
+**Query pattern:**
+The important query that determine the DB to be used is to fetch a conversation, messages, and all of the users in the conversation. This would affect the performance of the system. 
+  * If an SQL DB is used, fetching all of the information could be achived within 1 query using JOIN.
+  * If a non SQL DB is used, unless we normalize the models (put them into single collection), there would be seraprated queries to the db.
+
+**Scalability**
+We need to plan for the future if the Chat app becomes popular and store massive amount of data. We will need to start to introduce sharding. The data model that is most likely be shareded first is Message. Both No SQL and SQL db (ex: PostgresQL 11+) offer sharing. In this case, we could apply sharing by conversation's ID. 
+
+
